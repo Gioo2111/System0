@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=3 uid="uid://brp6iy4bf6d22"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_vwx2x"]
+[ext_resource type="PackedScene" uid="uid://c4vs7cfe81tfx" path="res://Keyboard.tscn" id="2_netbo"]
+[ext_resource type="PackedScene" uid="uid://dxp3203r83qpw" path="res://ARow.tscn" id="2_sws5g"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vwx2x")
+metadata/_edit_use_anchors_ = true
+
+[node name="Grid" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ARow" parent="." instance=ExtResource("2_sws5g")]
+layout_mode = 2
+offset_right = 428.0
+offset_bottom = 50.0
+
+[node name="Info" type="VBoxContainer" parent="."]
+layout_direction = 2
+layout_mode = 1
+offset_left = 477.0
+offset_top = 18.0
+offset_right = 736.0
+offset_bottom = 505.0
+
+[node name="Attempts" type="Label" parent="Info"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Rules" type="Label" parent="Info"]
+custom_minimum_size = Vector2(200, 0)
+layout_direction = 3
+layout_mode = 2
+text = "
+Use letras (A–Z) e números (0–9) para descobrir a senha
+🟪 Letra  | 🟦 Número
+🟩 Correto e na posição certa
+🟨 Está na senha, posição errada
+⬜ Não está na senha
+"
+horizontal_alignment = 2
+autowrap_mode = 2
+justification_flags = 128
+
+[node name="Hacker" type="Sprite2D" parent="."]
+
+[node name="Keyboard" parent="." instance=ExtResource("2_netbo")]
+custom_minimum_size = Vector2(400, 400)
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 9
+anchor_left = 0.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_right = 44.0
+offset_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 2

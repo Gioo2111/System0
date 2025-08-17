@@ -1,0 +1,163 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4vs7cfe81tfx"]
+
+[ext_resource type="Script" path="res://Keyboard.gd" id="1_hxnwl"]
+
+[node name="Keyboard" type="GridContainer"]
+custom_minimum_size = Vector2(40, 40)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = -472.0
+offset_bottom = 44.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 10
+script = ExtResource("1_hxnwl")
+
+[node name="P" type="Button" parent="."]
+layout_mode = 2
+text = "P"
+
+[node name="O" type="Button" parent="."]
+layout_mode = 2
+text = "O"
+
+[node name="I" type="Button" parent="."]
+layout_mode = 2
+text = "I"
+
+[node name="U" type="Button" parent="."]
+layout_mode = 2
+text = "U"
+
+[node name="Y" type="Button" parent="."]
+layout_mode = 2
+text = "Y"
+
+[node name="T" type="Button" parent="."]
+layout_mode = 2
+text = "T"
+
+[node name="R" type="Button" parent="."]
+layout_mode = 2
+text = "R"
+
+[node name="E" type="Button" parent="."]
+layout_mode = 2
+text = "E"
+
+[node name="W" type="Button" parent="."]
+layout_mode = 2
+text = "W"
+
+[node name="Q" type="Button" parent="."]
+layout_mode = 2
+text = "Q"
+
+[node name="M" type="Button" parent="."]
+layout_mode = 2
+text = "M"
+
+[node name="L" type="Button" parent="."]
+layout_mode = 2
+text = "L"
+
+[node name="K" type="Button" parent="."]
+layout_mode = 2
+text = "K"
+
+[node name="J" type="Button" parent="."]
+layout_mode = 2
+text = "J"
+
+[node name="H" type="Button" parent="."]
+layout_mode = 2
+text = "H"
+
+[node name="G" type="Button" parent="."]
+layout_mode = 2
+text = "G"
+
+[node name="F" type="Button" parent="."]
+layout_mode = 2
+text = "F"
+
+[node name="D" type="Button" parent="."]
+layout_mode = 2
+text = "D"
+
+[node name="S" type="Button" parent="."]
+layout_mode = 2
+text = "S"
+
+[node name="A" type="Button" parent="."]
+layout_mode = 2
+text = "A
+
+"
+
+[node name="0" type="Button" parent="."]
+layout_mode = 2
+text = "0"
+
+[node name="1" type="Button" parent="."]
+layout_mode = 2
+text = "1"
+
+[node name="2" type="Button" parent="."]
+layout_mode = 2
+text = "2"
+
+[node name="3" type="Button" parent="."]
+layout_mode = 2
+text = "3"
+
+[node name="N" type="Button" parent="."]
+layout_mode = 2
+text = "N"
+
+[node name="B" type="Button" parent="."]
+layout_mode = 2
+text = "B"
+
+[node name="V" type="Button" parent="."]
+layout_mode = 2
+text = "V"
+
+[node name="C" type="Button" parent="."]
+layout_mode = 2
+text = "C"
+
+[node name="X" type="Button" parent="."]
+layout_mode = 2
+text = "X"
+
+[node name="Z" type="Button" parent="."]
+layout_mode = 2
+text = "Z"
+
+[node name="4" type="Button" parent="."]
+layout_mode = 2
+text = "4"
+
+[node name="5" type="Button" parent="."]
+layout_mode = 2
+text = "5"
+
+[node name="6" type="Button" parent="."]
+layout_mode = 2
+text = "6"
+
+[node name="7" type="Button" parent="."]
+layout_mode = 2
+text = "7"
+
+[node name="8" type="Button" parent="."]
+layout_mode = 2
+text = "8"
+
+[node name="9" type="Button" parent="."]
+layout_mode = 2
+text = "9"
