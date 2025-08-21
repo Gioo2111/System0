@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Keyboard.gd" id="1_hxnwl"]
 
 [node name="Keyboard" type="GridContainer"]
+modulate = Color(0.596078, 0.690196, 0.415686, 1)
 custom_minimum_size = Vector2(40, 40)
 anchors_preset = 5
 anchor_left = 0.5

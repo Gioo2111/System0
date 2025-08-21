@@ -23,4 +23,4 @@ func update_keys(chars: Array, statuses: Array):
 				"present":
 					btn.modulate = Color.YELLOW
 				"absent":
-					btn.modulate = Color.DARK_GRAY
+					btn.modulate = Color.BLACK

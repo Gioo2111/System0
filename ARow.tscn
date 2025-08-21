@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://ARow.gd" id="1_lxpe1"]
 
 [node name="ARow" type="HBoxContainer"]
+modulate = Color(0.724945, 0.818069, 0.555207, 1)
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_lxpe1")

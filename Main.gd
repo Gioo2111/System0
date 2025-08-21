@@ -14,8 +14,14 @@ var game_won := false
 @onready var attempts := $Info/Attempts
 @onready var keyboard := $Keyboard
 @onready var a_row := $ARow
-
+	
 func _ready():
+	var music = load("res://Assets/Music.wav") as AudioStream
+	$MusicPlayer.stream = music
+	$MusicPlayer.play()
+	$Background.play("default")
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	get_viewport().set_size(Vector2i(1920, 1080))
 	generate_password()
 	create_empty_rows()
 	for row in grid.get_children():
@@ -24,6 +30,7 @@ func _ready():
 	await get_tree().process_frame
 	if current_row:
 		current_row.grab_focus()
+		current_row.set_active(true)
 
 	keyboard.connect("key_pressed", Callable(self, "_on_virtual_key_pressed"))
 	update_attempts_label()
@@ -34,7 +41,7 @@ func generate_password():
 	password.clear()
 	for i in PASSWORD_LENGTH:
 		password.append(chars[randi() % chars.length()])
-	print("Senha gerada: ", password)  # Debug
+	print("Senha gerada: ", password)  # Tirar dps
 
 func create_empty_rows():
 	for i in MAX_ATTEMPTS:
@@ -59,18 +66,10 @@ func is_all_correct(result: Array) -> bool:
 	
 func move_cursor(dir: int):
 	current_column = clamp(current_column + dir, 0, PASSWORD_LENGTH - 1)
-	highlight_current_cell()
-
-func highlight_current_cell():
-	var row = grid.get_child(current_attempt)
-	for i in range(PASSWORD_LENGTH):
-		var panel = row.get_child(i)
-		panel.self_modulate = Color.WHITE if i == current_column else Color(1, 1, 1, 1)
 
 func add_char_at_cursor(char: String):
 	if current_column < PASSWORD_LENGTH:
 		if current_input.size() <= current_column:
-			# Completa espaços vazios até a coluna
 			while current_input.size() < current_column:
 				current_input.append("_")
 			current_input.append(char)
@@ -86,8 +85,12 @@ func remove_char_at_cursor():
 
 	
 func _unhandled_input(event):
+	$TypePlayer.stream = preload("res://Assets/Type.wav")
+	$TypePlayer.play()
 	if game_won or current_row == null:
-		return 
+		if event.keycode == Key.KEY_ESCAPE:
+			get_tree().quit()
+		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == Key.KEY_LEFT:
 			current_row.move_cursor(-1)
@@ -97,6 +100,8 @@ func _unhandled_input(event):
 			current_row.remove_char_at_cursor()
 		elif event.keycode == Key.KEY_ENTER:
 			submit_current_input()
+		elif event.keycode == Key.KEY_ESCAPE:
+			get_tree().quit()
 		else:
 			var char = event.as_text().to_upper()
 			if char.length() == 1 and (
@@ -129,22 +134,29 @@ func update_input_display():
 		var label = panel.get_child(0)
 		if label and label is Label:
 			label.text = current_input[i] if i < current_input.size() and current_input[i] != "_" else "_"
-	highlight_current_cell()
-
 			
 func submit_current_input():
+	$TryPlayer.stream = preload("res://Assets/Try.wav")
+	$TryPlayer.play()
+	
 	if current_row == null:
 		return
 		
-	var guess = current_row.get_current_input()
-	if guess.size() != PASSWORD_LENGTH or "_" in guess:
+	if not current_row.is_complete():
 		return
+	var guess = current_row.get_current_input()
 	submit_attempt(guess)
-
+	current_row.set_active(false)
+	
 	if current_attempt < MAX_ATTEMPTS:
-		current_row = grid.get_child(current_attempt)  # próxima linha
+		current_row = grid.get_child(current_attempt)  
+		current_row.set_active(true)
 	else:
 		current_row = null
+	current_input.clear()
+	current_column = 0
+	update_input_display()
+	
 	if current_input.size() == PASSWORD_LENGTH:
 		submit_attempt(current_input.duplicate())
 		current_input.clear()
@@ -181,10 +193,11 @@ func evaluate_attempt(guess: Array) -> Array:
 	return result
 
 func show_victory():
-	print("Você venceu!")
 	$Info/Rules.text = "Parabéns! Você acertou a senha!"
 	game_won = true
 
 func show_game_over():
-	print("Fim de jogo! A senha era: ", String("").join(password))
+	$GameoverPlayer.stream = preload("res://Assets/Gameover.wav")
+	$GameoverPlayer.play()
+	$MusicPlayer.stop()
 	$Info/Rules.text = "Fim de jogo! A senha era: %s" % String("").join(password)
